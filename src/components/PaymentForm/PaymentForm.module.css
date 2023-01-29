@@ -1,5 +1,6 @@
 * {
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    
 }
 
 .formContainer {
@@ -47,9 +48,14 @@
     width: 100%
 }
 
-.stateAndPostcodeContainer {
+.stateAndPostcodeSection {
     display: flex;
     flex-direction: row;
+}
+
+.stateAndPostcodeContainer {
+
+    width: 50%
 }
 
 .stateAndPostcodeInput {
@@ -58,7 +64,6 @@
 }
 
 .stateAndPostcodeLabel {
-    /* width: calc(350px / 2); */
     font-size: 14px;
     font-weight: 500;
     line-height: 8px;

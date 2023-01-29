@@ -96,6 +96,7 @@ export const PaymentForm = ({ onBack }: any) => {
       </section>
       <section>
         <label className={styles.addressLabel}>Country</label>
+        {/* <select value={value} /> */}
         <Select
           isClearable
           options={options as any}
@@ -148,30 +149,28 @@ export const PaymentForm = ({ onBack }: any) => {
           rules={{ required: true }}
         />
       </section> */}
-      <section>
+      <section className={styles.stateAndPostcodeSection}>
         <div className={styles.stateAndPostcodeContainer}>
-          <div>
-            <label className={styles.stateAndPostcodeLabel}>
-              State <span>(optional)</span>
-            </label>
-            <input
-              {...register("state", {
-                required: "State is required",
-              })}
-              placeholder="e.g. 123 Fake St."
-              className={styles.stateAndPostcodeInput}
-            />
-          </div>
-          <div>
-            <label>Post code</label>
-            <input
-              {...register("postcode", {
-                required: "Postcode is required",
-              })}
-              placeholder="e.g. 123 Fake St."
-              className={styles.stateAndPostcodeInput}
-            />
-          </div>
+          <label className={styles.stateAndPostcodeLabel}>
+            State <span>(optional)</span>
+          </label>
+          <input
+            {...register("state", {
+              required: "State is required",
+            })}
+            placeholder="e.g. 123 Fake St."
+            className={styles.stateAndPostcodeInput}
+          />
+        </div>
+        <div className={styles.stateAndPostcodeContainer}>
+          <label>Post code</label>
+          <input
+            {...register("postcode", {
+              required: "Postcode is required",
+            })}
+            placeholder="e.g. 123 Fake St."
+            className={styles.stateAndPostcodeInput}
+          />
         </div>
       </section>
       <section>
