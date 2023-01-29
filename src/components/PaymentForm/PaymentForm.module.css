@@ -38,11 +38,23 @@
     border-radius: 3px;
 }
 
-.cardInput {
-
+.stateAndPostcodeContainer {
+    display: flex;
+    flex-direction: row;
 }
 
-/* add 36x between each component */
+.stateAndPostcodeInput {
+    height: 50px;
+    width: 100%
+}
+
+.stateAndPostcodeLabel{
+    width: calc(350px / 2)
+}
+
+.cardInput {
+    
+}
 
 
 

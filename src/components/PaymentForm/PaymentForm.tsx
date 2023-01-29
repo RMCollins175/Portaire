@@ -19,6 +19,8 @@ export const PaymentForm = ({ onBack }: any) => {
       addressLineOne: "",
       addressLineTwo: "",
       country: "",
+      state: "",
+      postcode: "",
     },
   });
 
@@ -118,6 +120,36 @@ export const PaymentForm = ({ onBack }: any) => {
           )}
           rules={{ required: true }}
         />
+      </section>
+      <section>
+        <div className={styles.stateAndPostcodeContainer}>
+          <label className={styles.stateAndPostcodeLabe}>
+            State <span>(optional)</span>
+            <input
+              // id={`title-${idea?.id}`}
+              {...register("state", {
+                required: "State is required",
+              })}
+              placeholder="e.g. 123 Fake St."
+              className={styles.stateAndPostcodeInput}
+              // defaultValue={idea?.title}
+              // aria-label={idea?.title}
+            />
+          </label>
+          <label>
+            Post code
+            <input
+              // id={`title-${idea?.id}`}
+              {...register("postcode", {
+                required: "Postcode is required",
+              })}
+              placeholder="e.g. 123 Fake St."
+              className={styles.stateAndPostcodeInput}
+              // defaultValue={idea?.title}
+              // aria-label={idea?.title}
+            />
+          </label>
+        </div>
       </section>
       <div>
         <button onClick={onBack}>Cancel</button>
