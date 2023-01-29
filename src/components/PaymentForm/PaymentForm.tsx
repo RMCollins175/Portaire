@@ -6,6 +6,7 @@ import countryList from "react-select-country-list";
 
 export const PaymentForm = ({ onBack }: any) => {
   const [value, setValue] = useState("");
+
   const {
     register,
     handleSubmit,
@@ -39,47 +40,38 @@ export const PaymentForm = ({ onBack }: any) => {
     );
   };
 
-  // const handleSubmission = (e: any) => {
-  //   // e.preventDefault();
-  //   console.log(e.target.addressLineOne.value);
-  // };
-
   return (
     <form
-      // onSubmit={(event) => handleSubmission(event)}
       onSubmit={handleSubmit((data) => handleSubmission(data))}
       className={styles.formContainer}>
       <h3 style={{ margin: "0px" }}>Update payment method</h3>
-      <section>
-        <label
-          style={{
-            border: "1px solid grey",
-            paddingBottom: "5px",
-            width: "350px",
-          }}
-          className={styles.cardInput}>
-          <input
-            {...register("cardNumber", {
-              required: "Card number is required",
-            })}
-            placeholder="Card number"
-            style={{ width: "16em", border: "none", outline: "transparent" }}
-          />
-          <input
-            {...register("expiryDate", {
-              required: "Expiry date is required",
-            })}
-            placeholder="MM/YY"
-            style={{ width: "6em", border: "none", outline: "transparent" }}
-          />
-          <input
-            {...register("ccv", {
-              required: "CCV is required",
-            })}
-            placeholder={"CCV"}
-            style={{ width: "3em", border: "none", outline: "transparent" }}
-          />
-        </label>
+      <section
+        style={{
+          border: "1px solid grey",
+          width: "100%",
+        }}>
+        <label className={styles.cardInput}></label>
+        <input
+          {...register("cardNumber", {
+            required: "Card number is required",
+          })}
+          placeholder="Card number"
+          style={{ width: "16em", border: "none", outline: "transparent" }}
+        />
+        <input
+          {...register("expiryDate", {
+            required: "Expiry date is required",
+          })}
+          placeholder="MM/YY"
+          style={{ width: "6em", border: "none", outline: "transparent" }}
+        />
+        <input
+          {...register("ccv", {
+            required: "CCV is required",
+          })}
+          placeholder={"CCV"}
+          style={{ width: "3em", border: "none", outline: "transparent" }}
+        />
       </section>
       <section>
         <label className={styles.addressLabel}>Address Line 1</label>
@@ -103,6 +95,30 @@ export const PaymentForm = ({ onBack }: any) => {
         />
       </section>
       <section>
+        <label className={styles.addressLabel}>Country</label>
+        <Select
+          isClearable
+          options={options as any}
+          value={value}
+          onChange={changeHandler}
+          styles={{
+            control: (baseStyles, state) => ({
+              ...baseStyles,
+              height: "50px",
+            }),
+          }}
+          theme={(theme) => ({
+            ...theme,
+            borderRadius: 0,
+            colors: {
+              ...theme.colors,
+              primary25: "hotpink",
+              primary: "black",
+            },
+          })}
+        />
+      </section>
+      {/* <section>
         <label className={styles.addressLabel}>Country</label>
         <Controller
           name="country"
@@ -131,11 +147,11 @@ export const PaymentForm = ({ onBack }: any) => {
           )}
           rules={{ required: true }}
         />
-      </section>
+      </section> */}
       <section>
         <div className={styles.stateAndPostcodeContainer}>
           <div>
-            <label className={styles.stateAndPostcodeLabe}>
+            <label className={styles.stateAndPostcodeLabel}>
               State <span>(optional)</span>
             </label>
             <input
