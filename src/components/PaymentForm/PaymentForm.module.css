@@ -16,3 +16,24 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
 }
+
+.formInput {
+    margin-bottom: 36px;
+}
+
+.addressInput{
+    height: 50px;
+    width: 350px;
+    border-radius: 3px;
+    margin-bottom: 36px;
+}
+
+.cardInput {
+    
+}
+
+/* add 36x between each component */
+
+
+
+ 
