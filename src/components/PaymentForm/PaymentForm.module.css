@@ -21,6 +21,10 @@
     margin-bottom: 36px;
 }
 
+.addressLabel {
+    font-weight: 900;
+}
+
 .addressInput{
     height: 50px;
     width: 350px;
@@ -28,8 +32,14 @@
     margin-bottom: 36px;
 }
 
+.countryInput {
+    height: 50px;   
+    width: 350px;
+    border-radius: 3px;
+}
+
 .cardInput {
-    
+
 }
 
 /* add 36x between each component */
