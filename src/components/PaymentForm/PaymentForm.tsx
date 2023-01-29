@@ -5,12 +5,14 @@ import Select from "react-select";
 import countryList from "react-select-country-list";
 
 export const PaymentForm = ({ onBack }: any) => {
+  const [value, setValue] = useState("");
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
     control,
+    watch,
   } = useForm({
     defaultValues: {
       cardNumber: "",
@@ -18,13 +20,12 @@ export const PaymentForm = ({ onBack }: any) => {
       ccv: "",
       addressLineOne: "",
       addressLineTwo: "",
-      country: "",
+      country: value,
       state: "",
       postcode: "",
     },
   });
 
-  const [value, setValue] = useState("");
   const options = useMemo(() => countryList().getData(), []);
 
   const changeHandler = (value: any) => {
@@ -37,8 +38,15 @@ export const PaymentForm = ({ onBack }: any) => {
       data
     );
   };
+
+  // const handleSubmission = (e: any) => {
+  //   // e.preventDefault();
+  //   console.log(e.target.addressLineOne.value);
+  // };
+
   return (
     <form
+      // onSubmit={(event) => handleSubmission(event)}
       onSubmit={handleSubmit((data) => handleSubmission(data))}
       className={styles.formContainer}>
       <h3 style={{ margin: "0px" }}>Update payment method</h3>
@@ -76,28 +84,22 @@ export const PaymentForm = ({ onBack }: any) => {
       <section>
         <label className={styles.addressLabel}>Address Line 1</label>
         <input
-          // id={`title-${idea?.id}`}
           {...register("addressLineOne", {
             required: "Address line 1 is required",
           })}
           placeholder="e.g. 123 Fake St."
           required
           className={styles.addressInput}
-          // defaultValue={idea?.title}
-          // aria-label={idea?.title}
         />
       </section>
       <section>
         <label className={styles.addressLabel}>Address Line 2</label>
         <input
-          // id={`title-${idea?.id}`}
           {...register("addressLineTwo", {
             required: "Address line 2 is required",
           })}
           placeholder="e.g. 123 Fake St."
           className={styles.addressInput}
-          // defaultValue={idea?.title}
-          // aria-label={idea?.title}
         />
       </section>
       <section>
@@ -107,7 +109,6 @@ export const PaymentForm = ({ onBack }: any) => {
           control={control}
           render={({ value }: any) => (
             <Select
-              // className={styles.countryInput}
               options={options}
               value={value}
               onChange={changeHandler}
@@ -126,7 +127,6 @@ export const PaymentForm = ({ onBack }: any) => {
                   primary: "black",
                 },
               })}
-              // defaultValue={country.find((c) => c.value === countryValue)}
             />
           )}
           rules={{ required: true }}
@@ -139,27 +139,21 @@ export const PaymentForm = ({ onBack }: any) => {
               State <span>(optional)</span>
             </label>
             <input
-              // id={`title-${idea?.id}`}
               {...register("state", {
                 required: "State is required",
               })}
               placeholder="e.g. 123 Fake St."
               className={styles.stateAndPostcodeInput}
-              // defaultValue={idea?.title}
-              // aria-label={idea?.title}
             />
           </div>
           <div>
             <label>Post code</label>
             <input
-              // id={`title-${idea?.id}`}
               {...register("postcode", {
                 required: "Postcode is required",
               })}
               placeholder="e.g. 123 Fake St."
               className={styles.stateAndPostcodeInput}
-              // defaultValue={idea?.title}
-              // aria-label={idea?.title}
             />
           </div>
         </div>
