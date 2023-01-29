@@ -41,13 +41,13 @@ export const PaymentForm = ({ onBack }: any) => {
     <form
       onSubmit={handleSubmit((data) => handleSubmission(data))}
       className={styles.formContainer}>
-      <h2>Update payment method</h2>
+      <h3 style={{ margin: "0px" }}>Update payment method</h3>
       <section>
         <label
           style={{
             border: "1px solid grey",
             paddingBottom: "5px",
-            outline: "red",
+            width: "350px",
           }}
           className={styles.cardInput}>
           <input
@@ -74,47 +74,58 @@ export const PaymentForm = ({ onBack }: any) => {
         </label>
       </section>
       <section>
-        <label className={styles.addressLabel}>
-          Address Line 1
-          <input
-            // id={`title-${idea?.id}`}
-            {...register("addressLineOne", {
-              required: "Address line 1 is required",
-            })}
-            placeholder="e.g. 123 Fake St."
-            required
-            className={styles.addressInput}
-            // defaultValue={idea?.title}
-            // aria-label={idea?.title}
-          />
-        </label>
+        <label className={styles.addressLabel}>Address Line 1</label>
+        <input
+          // id={`title-${idea?.id}`}
+          {...register("addressLineOne", {
+            required: "Address line 1 is required",
+          })}
+          placeholder="e.g. 123 Fake St."
+          required
+          className={styles.addressInput}
+          // defaultValue={idea?.title}
+          // aria-label={idea?.title}
+        />
       </section>
       <section>
-        <label className={styles.addressLabel}>
-          Address Line 2
-          <input
-            // id={`title-${idea?.id}`}
-            {...register("addressLineTwo", {
-              required: "Address line 2 is required",
-            })}
-            placeholder="e.g. 123 Fake St."
-            className={styles.addressInput}
-            // defaultValue={idea?.title}
-            // aria-label={idea?.title}
-          />
-        </label>
+        <label className={styles.addressLabel}>Address Line 2</label>
+        <input
+          // id={`title-${idea?.id}`}
+          {...register("addressLineTwo", {
+            required: "Address line 2 is required",
+          })}
+          placeholder="e.g. 123 Fake St."
+          className={styles.addressInput}
+          // defaultValue={idea?.title}
+          // aria-label={idea?.title}
+        />
       </section>
       <section>
-        <label>Country</label>
+        <label className={styles.addressLabel}>Country</label>
         <Controller
           name="country"
           control={control}
           render={({ value }: any) => (
             <Select
-              className={styles.countryInput}
+              // className={styles.countryInput}
               options={options}
               value={value}
               onChange={changeHandler}
+              styles={{
+                control: (baseStyles, state) => ({
+                  ...baseStyles,
+                  height: "50px",
+                }),
+              }}
+              theme={(theme) => ({
+                ...theme,
+                borderRadius: 0,
+                colors: {
+                  ...theme.colors,
+                  primary25: "hotpink",
+                  primary: "black",
+                },
+              })}
               // defaultValue={country.find((c) => c.value === countryValue)}
             />
           )}
@@ -123,8 +134,10 @@ export const PaymentForm = ({ onBack }: any) => {
       </section>
       <section>
         <div className={styles.stateAndPostcodeContainer}>
-          <label className={styles.stateAndPostcodeLabe}>
-            State <span>(optional)</span>
+          <div>
+            <label className={styles.stateAndPostcodeLabe}>
+              State <span>(optional)</span>
+            </label>
             <input
               // id={`title-${idea?.id}`}
               {...register("state", {
@@ -135,9 +148,9 @@ export const PaymentForm = ({ onBack }: any) => {
               // defaultValue={idea?.title}
               // aria-label={idea?.title}
             />
-          </label>
-          <label>
-            Post code
+          </div>
+          <div>
+            <label>Post code</label>
             <input
               // id={`title-${idea?.id}`}
               {...register("postcode", {
@@ -148,12 +161,26 @@ export const PaymentForm = ({ onBack }: any) => {
               // defaultValue={idea?.title}
               // aria-label={idea?.title}
             />
-          </label>
+          </div>
         </div>
       </section>
-      <div>
-        <button onClick={onBack}>Cancel</button>
-      </div>
+      <section>
+        <div className={styles.callToActionContainer}>
+          <button
+            type="button"
+            onClick={onBack}
+            aria-label={`Cancel Button`}
+            className={styles.button}>
+            Cancel
+          </button>
+          <button
+            type="submit"
+            aria-label={`Update Button`}
+            className={styles.button}>
+            Update
+          </button>
+        </div>
+      </section>
     </form>
   );
 };
