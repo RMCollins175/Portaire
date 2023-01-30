@@ -1,15 +1,16 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import styles from "./Button.module.css";
 
 interface ButtonProps {
   text: string;
   onClick: () => void;
+  icon: ReactNode;
 }
 
-export default function Button({ text, onClick }: ButtonProps) {
+export default function Button({ text, onClick, icon }: ButtonProps) {
   return (
     <button onClick={onClick} className={styles.button}>
-      <p className={styles.icon}>I</p>
+      {icon}
       <p>{text}</p>
     </button>
   );

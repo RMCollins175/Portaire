@@ -1,8 +1,22 @@
 .button {
     display: flex;
     align-items: center;
+    height: 28px;
+    width: 181px;
+    border-radius: 2px;
+    padding: 8px;
+
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: 400;
+
+    justify-content: space-evenly;
+
+    border: 1px solid #F9F9F9 
+
 }
 
 .icon {
-    padding-right: 5px
+    /* padding-right: 5px */
 }
+
