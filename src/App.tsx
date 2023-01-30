@@ -51,7 +51,6 @@ function App() {
       } catch (error) {
         if (!isCancelled) {
           if (attempts <= 5) {
-            console.log("HERE");
             setAttempts((a) => a + 1);
             setStatus("error");
             console.error(error);
@@ -76,7 +75,7 @@ function App() {
         <PaymentForm
           onBack={handleBackButton}
           formData={formData ? formData : null}
-          isLoading={true}
+          isLoading={isLoading}
           status={status}
         />
       )}
