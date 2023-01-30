@@ -21,6 +21,8 @@ export const PaymentForm = ({
   status,
 }: PaymentFormProps) => {
   const [value, setValue] = useState("");
+  const [defaultCountry, setDefaultCountry] = useState("");
+  console.log("🚀 ~ file: PaymentForm.tsx:24 ~ value", value);
 
   const {
     register,
@@ -36,16 +38,20 @@ export const PaymentForm = ({
       ccv: "",
       addressLineOne: formData.address_one || "",
       addressLineTwo: formData.address_two || "",
-      country: value,
+      country: defaultCountry || "",
       state: "" || formData.state,
       postcode: "" || formData.post_code,
     },
   });
 
+  useEffect(() => {
+    setDefaultCountry(value);
+  }, [value]);
+
   const options = useMemo(() => countryList().getData(), []);
 
   const handleChange = (value: any) => {
-    console.log("🚀 ~ file: PaymentForm.tsx:47 ~ handleChange ~ value", value);
+    // console.log("🚀 ~ file: PaymentForm.tsx:47 ~ handleChange ~ value", value);
     setValue(value);
     // setValue(event.target.value);
   };

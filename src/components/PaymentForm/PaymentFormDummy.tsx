@@ -42,20 +42,12 @@ export const PaymentForm = ({}) => {
       <h3 style={{ margin: "0px" }}>Update payment method</h3>
       <section className={styles.customSelect}>
         <label className={styles.countryLabel}>Country</label>
-        {/* <select {...register("country")} value={value} onChange={handleChange}>
-          {options.map((option) => (
-            <option key={option.label} value={option.label}>
-              {option.label}
-            </option>
-          ))}
-        </select> */}
-
         <Select
           {...register("country")}
           isClearable
           options={options as any}
           value={value}
-          onChange={(value) => handleChange(value)}
+          onChange={(selectedOption) => handleChange(selectedOption)}
           styles={{
             control: (baseStyles, state) => ({
               ...baseStyles,

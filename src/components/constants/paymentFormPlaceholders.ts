@@ -1,4 +1,4 @@
-export default {
+const paymentFormPlaceholders = {
   cardNumber: "Card number",
   expiryDate: "MM/YY",
   ccv: "CCV",
@@ -6,3 +6,5 @@ export default {
   state: "e.g. Middlesex",
   postCode: "e.g. W11 1NS",
 };
+
+export default paymentFormPlaceholders;
