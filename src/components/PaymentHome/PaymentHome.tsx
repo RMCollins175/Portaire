@@ -6,7 +6,7 @@ export const PaymentHome = ({ setCurrentScreen }: any) => {
     <Button
       onClick={() => setCurrentScreen("other")}
       text="Update payment method"
-      icon={<PoundIcon />}
+      icon={<PoundIcon style={{ marginTop: 1 }} />}
     />
   );
 };

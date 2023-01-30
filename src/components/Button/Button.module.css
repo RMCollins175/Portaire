@@ -10,13 +10,8 @@
     line-height: 12px;
     font-weight: 400;
 
-    justify-content: space-evenly;
+    justify-content: space-around;
 
     border: 1px solid #F9F9F9 
 
 }
-
-.icon {
-    /* padding-right: 5px */
-}
-

@@ -3,6 +3,7 @@ export interface PoundIconProps {
   id?: string;
   backgroundColor?: string;
   poundColor?: string;
+  style?: React.CSSProperties;
 }
 
 export const PoundIcon = ({
@@ -10,9 +11,10 @@ export const PoundIcon = ({
   id,
   backgroundColor = "black",
   poundColor = "white",
+  style,
 }: PoundIconProps) => {
   return (
-    <div id={id}>
+    <div id={id} style={style}>
       <svg
         width={`${12 * scale}`}
         height={`${12 * scale}`}
