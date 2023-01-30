@@ -25,7 +25,6 @@ function App() {
   const [formData, setFormData] = useState<ApiResponse | null>(null);
   const [isLoading, setIsLoading] = useState<boolean | null>(true);
   const [status, setStatus] = useState<DataStatuses | null>(null);
-  console.log("🚀 ~ file: App.tsx:28 ~ App ~ status", status);
   const [attempts, setAttempts] = useState(1);
 
   const handleBackButton = () => {
@@ -77,7 +76,7 @@ function App() {
         <PaymentForm
           onBack={handleBackButton}
           formData={formData ? formData : null}
-          isLoading={isLoading}
+          isLoading={true}
           status={status}
         />
       )}

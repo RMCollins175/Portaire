@@ -4,15 +4,21 @@ import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
 import countryList from "react-select-country-list";
 import stripe_img from "../../assets/img/stripe.png";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 interface PaymentFormProps {
   onBack: () => void;
   formData: any;
-  isLoading: boolean;
-  status: string;
+  isLoading: boolean | null;
+  status: string | null;
 }
 
-export const PaymentForm = ({ onBack, formData, isLoading, status }: any) => {
+export const PaymentForm = ({
+  onBack,
+  formData,
+  isLoading,
+  status,
+}: PaymentFormProps) => {
   const [value, setValue] = useState("");
 
   const {
@@ -55,6 +61,10 @@ export const PaymentForm = ({ onBack, formData, isLoading, status }: any) => {
         <h1>Sorry, this isn't working right now. Please try again later </h1>
       </div>
     );
+  }
+
+  if (isLoading) {
+    return <LoadingSpinner />;
   }
 
   return (
