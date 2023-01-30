@@ -1,10 +1,10 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styles from "./PaymentForm.module.css";
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
 import countryList from "react-select-country-list";
 
-export const PaymentForm = ({ onBack }: any) => {
+export const PaymentForm = ({ onBack, formData }: any) => {
   const [value, setValue] = useState("");
 
   const {
@@ -19,11 +19,11 @@ export const PaymentForm = ({ onBack }: any) => {
       cardNumber: "",
       expiryDate: "",
       ccv: "",
-      addressLineOne: "",
-      addressLineTwo: "",
+      addressLineOne: formData.address_one || "",
+      addressLineTwo: formData.address_two || "",
       country: value,
-      state: "",
-      postcode: "",
+      state: "" || formData.state,
+      postcode: "" || formData.post_code,
     },
   });
 
