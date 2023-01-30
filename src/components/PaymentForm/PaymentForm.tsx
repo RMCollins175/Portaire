@@ -5,7 +5,14 @@ import Select from "react-select";
 import countryList from "react-select-country-list";
 import stripe_img from "../../assets/img/stripe.png";
 
-export const PaymentForm = ({ onBack, formData }: any) => {
+interface PaymentFormProps {
+  onBack: () => void;
+  formData: any;
+  isLoading: boolean;
+  status: string;
+}
+
+export const PaymentForm = ({ onBack, formData, isLoading, status }: any) => {
   const [value, setValue] = useState("");
 
   const {
@@ -41,6 +48,14 @@ export const PaymentForm = ({ onBack, formData }: any) => {
       data
     );
   };
+
+  if (status === "error") {
+    return (
+      <div>
+        <h1>Sorry, this isn't working right now. Please try again later </h1>
+      </div>
+    );
+  }
 
   return (
     <form

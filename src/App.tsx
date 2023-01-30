@@ -25,6 +25,7 @@ function App() {
   const [formData, setFormData] = useState<ApiResponse | null>(null);
   const [isLoading, setIsLoading] = useState<boolean | null>(true);
   const [status, setStatus] = useState<DataStatuses | null>(null);
+  console.log("🚀 ~ file: App.tsx:28 ~ App ~ status", status);
   const [attempts, setAttempts] = useState(1);
 
   const handleBackButton = () => {
@@ -34,21 +35,28 @@ function App() {
   useEffect(() => {
     const abortController = new AbortController();
     const signal = abortController.signal;
+    let isCancelled = false;
 
     const fetchData = async () => {
       try {
-        const response = await fetch(API, { signal: signal });
-        if (response.ok) {
-          const data = await response.json();
-          setFormData(getRandomElement(data));
-        } else {
-          throw new Error("Fetch failed");
+        const response = await fetch(API, { signal });
+        if (!isCancelled) {
+          if (response.ok) {
+            const data = await response.json();
+            setFormData(getRandomElement(data));
+            setIsLoading(false);
+          } else {
+            throw new Error("Fetch failed");
+          }
         }
       } catch (error) {
-        if (attempts <= 5) {
-          setAttempts((a) => a + 1);
-          setStatus("error");
-          console.error(error);
+        if (!isCancelled) {
+          if (attempts <= 5) {
+            console.log("HERE");
+            setAttempts((a) => a + 1);
+            setStatus("error");
+            console.error(error);
+          }
         }
       }
     };
@@ -56,6 +64,7 @@ function App() {
     fetchData();
 
     return () => {
+      isCancelled = true;
       abortController.abort();
     };
   }, [attempts]);
@@ -68,6 +77,8 @@ function App() {
         <PaymentForm
           onBack={handleBackButton}
           formData={formData ? formData : null}
+          isLoading={isLoading}
+          status={status}
         />
       )}
     </div>
