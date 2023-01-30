@@ -20,9 +20,7 @@ export const PaymentForm = ({
   isLoading,
   status,
 }: PaymentFormProps) => {
-  const [value, setValue] = useState("");
-  const [defaultCountry, setDefaultCountry] = useState("");
-  console.log("🚀 ~ file: PaymentForm.tsx:24 ~ value", value);
+  const [countryValue, setCountryValue] = useState("");
 
   const {
     register,
@@ -31,6 +29,7 @@ export const PaymentForm = ({
     formState: { errors },
     control,
     watch,
+    setValue,
   } = useForm({
     defaultValues: {
       cardNumber: "",
@@ -38,27 +37,23 @@ export const PaymentForm = ({
       ccv: "",
       addressLineOne: formData.address_one || "",
       addressLineTwo: formData.address_two || "",
-      country: defaultCountry || "",
+      country: countryValue,
       state: "" || formData.state,
       postcode: "" || formData.post_code,
     },
   });
 
-  useEffect(() => {
-    setDefaultCountry(value);
-  }, [value]);
-
   const options = useMemo(() => countryList().getData(), []);
 
   const handleChange = (value: any) => {
-    // console.log("🚀 ~ file: PaymentForm.tsx:47 ~ handleChange ~ value", value);
-    setValue(value);
-    // setValue(event.target.value);
+    console.log("🚀 ~ file: PaymentForm.tsx:47 ~ handleChange ~ value", value);
+    setCountryValue(value);
+    setValue("country", value);
   };
 
   const handleSubmission = (data: any) => {
     console.log(
-      "🚀 ~ file: PaymentForm.tsx:18 ~ handleSubmission ~ data",
+      "🚀 ~ file: PaymentForm.tsx:60 ~ handleSubmission ~ data",
       data
     );
   };
@@ -143,7 +138,7 @@ export const PaymentForm = ({
           {...register("country")}
           isClearable
           options={options as any}
-          value={value}
+          value={countryValue}
           onChange={(value) => handleChange(value)}
           styles={{
             control: (baseStyles, state) => ({
