@@ -3,6 +3,7 @@ import styles from "./PaymentForm.module.css";
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
 import countryList from "react-select-country-list";
+import stripe_img from "../../assets/img/stripe.png";
 
 export const PaymentForm = ({ onBack, formData }: any) => {
   const [value, setValue] = useState("");
@@ -168,6 +169,9 @@ export const PaymentForm = ({ onBack, formData }: any) => {
             Update
           </button>
         </div>
+      </section>
+      <section style={{ alignSelf: "center" }}>
+        <img src={stripe_img} alt="Powered by Stripe" />
       </section>
     </form>
   );
