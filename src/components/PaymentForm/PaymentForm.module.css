@@ -27,9 +27,11 @@
     font-size: 14px;
     font-weight: 500;
     line-height: 8px;
+    padding-left: 2px;
 }
 
 .addressInput {
+    font-size: 16px;
     height: 50px;
     width: 100%;
     border-radius: 3px;
@@ -40,14 +42,15 @@
     height: 50px;   
     width: 100%;
     border-radius: 3px;
-    width: 100%
+    width: 100%;
 }
 
 .countryLabel {
     font-size: 14px;
     font-weight: 500;
     line-height: 8px;
-    margin-bottom: 5px
+    margin-bottom: 5px;
+    padding-left: 2px;
 }
 
 .stateAndPostcodeSection {
@@ -61,13 +64,15 @@
 
 .stateAndPostcodeInput {
     height: 50px;
-    width: 100%
+    width: 100%;
+    font-size: 16px;
 }
 
 .stateAndPostcodeLabel {
     font-size: 14px;
     font-weight: 500;
     line-height: 8px;
+    padding-left: 2px;
 }
 
 .cardInput {

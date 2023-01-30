@@ -5,6 +5,7 @@ import Select from "react-select";
 import countryList from "react-select-country-list";
 import stripe_img from "../../assets/img/stripe.png";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import placeholders from "../constants/paymentFormPlaceholders";
 
 interface PaymentFormProps {
   onBack: () => void;
@@ -43,9 +44,10 @@ export const PaymentForm = ({
 
   const options = useMemo(() => countryList().getData(), []);
 
-  const handleChange = (event: any) => {
-    // setValue(value);
-    setValue(event.target.value);
+  const handleChange = (value: any) => {
+    console.log("🚀 ~ file: PaymentForm.tsx:47 ~ handleChange ~ value", value);
+    setValue(value);
+    // setValue(event.target.value);
   };
 
   const handleSubmission = (data: any) => {
@@ -82,21 +84,21 @@ export const PaymentForm = ({
           {...register("cardNumber", {
             required: "Card number is required",
           })}
-          placeholder="Card number"
+          placeholder={placeholders.cardNumber}
           style={{ width: "16em", border: "none", outline: "transparent" }}
         />
         <input
           {...register("expiryDate", {
             required: "Expiry date is required",
           })}
-          placeholder="MM/YY"
+          placeholder={placeholders.expiryDate}
           style={{ width: "6em", border: "none", outline: "transparent" }}
         />
         <input
           {...register("ccv", {
             required: "CCV is required",
           })}
-          placeholder={"CCV"}
+          placeholder={placeholders.ccv}
           style={{ width: "3em", border: "none", outline: "transparent" }}
         />
       </section>
@@ -106,7 +108,7 @@ export const PaymentForm = ({
           {...register("addressLineOne", {
             required: "Address line 1 is required",
           })}
-          placeholder="e.g. 123 Fake St."
+          placeholder={placeholders.address}
           required
           className={styles.addressInput}
         />
@@ -117,26 +119,26 @@ export const PaymentForm = ({
           {...register("addressLineTwo", {
             required: "Address line 2 is required",
           })}
-          placeholder="e.g. 123 Fake St."
+          placeholder={placeholders.address}
           className={styles.addressInput}
         />
       </section>
       <section className={styles.customSelect}>
         <label className={styles.countryLabel}>Country</label>
-        <select {...register("country")} value={value} onChange={handleChange}>
+        {/* <select {...register("country")} value={value} onChange={handleChange}>
           {options.map((option) => (
             <option key={option.label} value={option.label}>
               {option.label}
             </option>
           ))}
-        </select>
-        {/* 
+        </select> */}
+
         <Select
           {...register("country")}
           isClearable
           options={options as any}
           value={value}
-          onChange={handleChange}
+          onChange={(value) => handleChange(value)}
           styles={{
             control: (baseStyles, state) => ({
               ...baseStyles,
@@ -152,7 +154,7 @@ export const PaymentForm = ({
               primary: "black",
             },
           })}
-        /> */}
+        />
       </section>
       <section className={styles.stateAndPostcodeSection}>
         <div className={styles.stateAndPostcodeContainer}>
@@ -163,17 +165,17 @@ export const PaymentForm = ({
             {...register("state", {
               required: "State is required",
             })}
-            placeholder="e.g. 123 Fake St."
+            placeholder={placeholders.state}
             className={styles.stateAndPostcodeInput}
           />
         </div>
         <div className={styles.stateAndPostcodeContainer}>
-          <label>Post code</label>
+          <label className={styles.stateAndPostcodeLabel}>Post code</label>
           <input
             {...register("postcode", {
               required: "Postcode is required",
             })}
-            placeholder="e.g. 123 Fake St."
+            placeholder={placeholders.postCode}
             className={styles.stateAndPostcodeInput}
           />
         </div>
