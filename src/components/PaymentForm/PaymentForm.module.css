@@ -47,6 +47,13 @@
     width: 100%
 }
 
+.countryLabel {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 8px;
+    margin-bottom: 5px
+}
+
 .stateAndPostcodeSection {
     display: flex;
     flex-direction: row;
@@ -83,5 +90,8 @@
     border-radius: 3px;
 }
 
-
- 
+.customSelect {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}

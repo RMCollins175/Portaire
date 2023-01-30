@@ -29,8 +29,9 @@ export const PaymentForm = ({ onBack }: any) => {
 
   const options = useMemo(() => countryList().getData(), []);
 
-  const changeHandler = (value: any) => {
-    setValue(value);
+  const handleChange = (event: any) => {
+    // setValue(value);
+    setValue(event.target.value);
   };
 
   const handleSubmission = (data: any) => {
@@ -94,14 +95,22 @@ export const PaymentForm = ({ onBack }: any) => {
           className={styles.addressInput}
         />
       </section>
-      <section>
-        <label className={styles.addressLabel}>Country</label>
-        {/* <select value={value} /> */}
+      <section className={styles.customSelect}>
+        <label className={styles.countryLabel}>Country</label>
+        <select {...register("country")} value={value} onChange={handleChange}>
+          {options.map((option) => (
+            <option key={option.label} value={option.label}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+        {/* 
         <Select
+          {...register("country")}
           isClearable
           options={options as any}
           value={value}
-          onChange={changeHandler}
+          onChange={handleChange}
           styles={{
             control: (baseStyles, state) => ({
               ...baseStyles,
@@ -117,38 +126,8 @@ export const PaymentForm = ({ onBack }: any) => {
               primary: "black",
             },
           })}
-        />
+        /> */}
       </section>
-      {/* <section>
-        <label className={styles.addressLabel}>Country</label>
-        <Controller
-          name="country"
-          control={control}
-          render={({ value }: any) => (
-            <Select
-              options={options}
-              value={value}
-              onChange={changeHandler}
-              styles={{
-                control: (baseStyles, state) => ({
-                  ...baseStyles,
-                  height: "50px",
-                }),
-              }}
-              theme={(theme) => ({
-                ...theme,
-                borderRadius: 0,
-                colors: {
-                  ...theme.colors,
-                  primary25: "hotpink",
-                  primary: "black",
-                },
-              })}
-            />
-          )}
-          rules={{ required: true }}
-        />
-      </section> */}
       <section className={styles.stateAndPostcodeSection}>
         <div className={styles.stateAndPostcodeContainer}>
           <label className={styles.stateAndPostcodeLabel}>
