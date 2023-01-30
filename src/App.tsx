@@ -1,36 +1,43 @@
-import { useEffect, useState } from "react";
-import "./App.css";
+import { useEffect, useReducer } from "react";
 import { PaymentForm } from "./components/PaymentForm/PaymentForm";
 import { PaymentHome } from "./components/PaymentHome/PaymentHome";
 import { getRandomElement } from "./components/utilities/getRandomElement";
+import { Action, AppState } from "./types";
+import "./App.css";
 
 const API = "https://portaireapi.herokuapp.com/test/payment";
 
-export interface ApiResponse {
-  address_one: number;
-  address_two: string;
-  email: string;
-  first_name: string;
-  last_name: string;
-  post_code: string;
-  state: string;
-  __v: number;
-  _id: string;
-}
+const reducer = (state: AppState, action: Action) => {
+  switch (action.type) {
+    case "SET_CURRENT_SCREEN":
+      return { ...state, currentScreen: action.payload };
+    case "SET_FORM_DATA":
+      return { ...state, formData: action.payload };
+    case "SET_IS_LOADING":
+      return { ...state, isLoading: action.payload };
+    case "SET_STATUS":
+      return { ...state, status: action.payload };
+    case "INCREMENT_ATTEMPTS":
+      return { ...state, attempts: state.attempts + 1 };
+    default:
+      return state;
+  }
+};
 
-type DataStatuses = "success" | "error" | "loading";
+const initialState: AppState = {
+  currentScreen: "home",
+  formData: null,
+  isLoading: true,
+  status: null,
+  attempts: 1,
+};
 
 function App() {
-  const [currentScreen, setCurrentScreen] = useState<string>("home");
-  const [formData, setFormData] = useState<ApiResponse | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean | null>(true);
-  const [status, setStatus] = useState<DataStatuses | null>(null);
-  const [attempts, setAttempts] = useState(1);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const handleBackButton = () => {
-    setCurrentScreen("home");
+    dispatch({ type: "SET_CURRENT_SCREEN", payload: "home" });
   };
-
   useEffect(() => {
     const abortController = new AbortController();
     const signal = abortController.signal;
@@ -42,17 +49,20 @@ function App() {
         if (!isCancelled) {
           if (response.ok) {
             const data = await response.json();
-            setFormData(getRandomElement(data));
-            setIsLoading(false);
+            dispatch({
+              type: "SET_FORM_DATA",
+              payload: getRandomElement(data),
+            });
+            dispatch({ type: "SET_IS_LOADING", payload: false });
           } else {
             throw new Error("Fetch failed");
           }
         }
       } catch (error) {
         if (!isCancelled) {
-          if (attempts <= 5) {
-            setAttempts((a) => a + 1);
-            setStatus("error");
+          if (state.attempts <= 5) {
+            dispatch({ type: "INCREMENT_ATTEMPTS" });
+            dispatch({ type: "SET_STATUS", payload: "error" });
             console.error(error);
           }
         }
@@ -65,18 +75,18 @@ function App() {
       isCancelled = true;
       abortController.abort();
     };
-  }, [attempts]);
+  }, [state.attempts]);
 
   return (
     <div className="container">
-      {currentScreen === "home" ? (
-        <PaymentHome setCurrentScreen={setCurrentScreen} />
+      {state.currentScreen === "home" ? (
+        <PaymentHome dispatch={dispatch} />
       ) : (
         <PaymentForm
           onBack={handleBackButton}
-          formData={formData ? formData : null}
-          isLoading={isLoading}
-          status={status}
+          formData={state.formData}
+          isLoading={state.isLoading}
+          status={state.status}
         />
       )}
     </div>
