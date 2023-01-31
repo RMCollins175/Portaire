@@ -56,6 +56,21 @@ export const PaymentForm = ({
       "🚀 ~ file: PaymentForm.tsx:60 ~ handleSubmission ~ data",
       data
     );
+
+    // fetch("https://portaireapi.herokuapp.com/test/payment", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(data),
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log("Success:", data);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error:", error);
+    //   });
   };
 
   if (status === "error") {
