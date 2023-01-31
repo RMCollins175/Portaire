@@ -103,7 +103,7 @@ export const PaymentForm = ({
       <h3 style={{ margin: "0px" }}>Update payment method</h3>
       <div>
         <PaymentInputsWrapper {...wrapperProps}>
-          <svg {...getCardImageProps()} />
+          <svg {...getCardImageProps({ images } as any)} />
           <label className={styles.cardInput}></label>
           <input
             {...register("cardNumber", {
