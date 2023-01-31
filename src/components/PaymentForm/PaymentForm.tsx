@@ -6,6 +6,8 @@ import countryList from "react-select-country-list";
 import stripe_img from "../../assets/img/stripe.png";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import placeholders from "../constants/paymentFormPlaceholders";
+import { PaymentInputsWrapper, usePaymentInputs } from "react-payment-inputs";
+import images from "react-payment-inputs/images";
 
 interface PaymentFormProps {
   onBack: () => void;
@@ -73,6 +75,15 @@ export const PaymentForm = ({
     //   });
   };
 
+  const {
+    meta,
+    getCardImageProps,
+    getCardNumberProps,
+    getExpiryDateProps,
+    getCVCProps,
+    wrapperProps,
+  } = usePaymentInputs();
+
   if (status === "error") {
     return (
       <div>
@@ -90,34 +101,37 @@ export const PaymentForm = ({
       onSubmit={handleSubmit((data) => handleSubmission(data))}
       className={styles.formContainer}>
       <h3 style={{ margin: "0px" }}>Update payment method</h3>
-      <section
-        style={{
-          border: "1px solid grey",
-          width: "100%",
-        }}>
-        <label className={styles.cardInput}></label>
-        <input
-          {...register("cardNumber", {
-            required: "Card number is required",
-          })}
-          placeholder={placeholders.cardNumber}
-          style={{ width: "16em", border: "none", outline: "transparent" }}
-        />
-        <input
-          {...register("expiryDate", {
-            required: "Expiry date is required",
-          })}
-          placeholder={placeholders.expiryDate}
-          style={{ width: "6em", border: "none", outline: "transparent" }}
-        />
-        <input
-          {...register("ccv", {
-            required: "CCV is required",
-          })}
-          placeholder={placeholders.ccv}
-          style={{ width: "3em", border: "none", outline: "transparent" }}
-        />
-      </section>
+      <div>
+        <PaymentInputsWrapper {...wrapperProps}>
+          <svg {...getCardImageProps()} />
+          <label className={styles.cardInput}></label>
+          <input
+            {...register("cardNumber", {
+              required: "Card number is required",
+            })}
+            // placeholder={placeholders.cardNumber}
+            // style={{ width: "16em", border: "none", outline: "transparent" }}
+            {...getCardNumberProps()}
+          />
+          <input
+            {...register("expiryDate", {
+              required: "Expiry date is required",
+            })}
+            // placeholder={placeholders.expiryDate}
+            // style={{ width: "6em", border: "none", outline: "transparent" }}
+            {...getExpiryDateProps()}
+          />
+          <input
+            {...register("ccv", {
+              required: "CCV is required",
+            })}
+            // placeholder={placeholders.ccv}
+            // style={{ width: "3em", border: "none", outline: "transparent" }}
+            {...getCVCProps()}
+          />
+        </PaymentInputsWrapper>
+        {errors.cardNumber && <div>Field is required</div>}
+      </div>
       <section>
         <label className={styles.addressLabel}>Address Line 1</label>
         <input
@@ -152,6 +166,7 @@ export const PaymentForm = ({
         <Select
           {...register("country")}
           isClearable
+          required
           options={options as any}
           value={countryValue}
           onChange={(value) => handleChange(value)}
@@ -171,6 +186,7 @@ export const PaymentForm = ({
             },
           })}
         />
+        {/* {errors.country && <div>Field is rquired</div>} */}
       </section>
       <section className={styles.stateAndPostcodeSection}>
         <div className={styles.stateAndPostcodeContainer}>

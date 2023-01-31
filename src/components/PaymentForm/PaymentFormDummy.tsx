@@ -5,9 +5,22 @@ import Select from "react-select";
 import countryList from "react-select-country-list";
 import stripe_img from "../../assets/img/stripe.png";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import placeholders from "../constants/paymentFormPlaceholders";
 
-export const PaymentForm = ({}) => {
-  const [value, setValue] = useState("");
+interface PaymentFormProps {
+  onBack: () => void;
+  formData: any;
+  isLoading: boolean | null;
+  status: string | null;
+}
+
+export const PaymentForm = ({
+  onBack,
+  formData,
+  isLoading,
+  status,
+}: PaymentFormProps) => {
+  const [countryValue, setCountryValue] = useState("");
 
   const {
     register,
@@ -16,21 +29,18 @@ export const PaymentForm = ({}) => {
     formState: { errors },
     control,
     watch,
+    setValue,
   } = useForm({
     defaultValues: {
-      country: value,
+      cardNumber: "",
+      expiryDate: "",
+      ccv: "",
     },
   });
 
-  const options = useMemo(() => countryList().getData(), []);
-
-  const handleChange = (value: any) => {
-    setValue(value);
-  };
-
   const handleSubmission = (data: any) => {
     console.log(
-      "🚀 ~ file: PaymentForm.tsx:18 ~ handleSubmission ~ data",
+      "🚀 ~ file: PaymentForm.tsx:60 ~ handleSubmission ~ data",
       data
     );
   };
@@ -40,30 +50,56 @@ export const PaymentForm = ({}) => {
       onSubmit={handleSubmit((data) => handleSubmission(data))}
       className={styles.formContainer}>
       <h3 style={{ margin: "0px" }}>Update payment method</h3>
-      <section className={styles.customSelect}>
-        <label className={styles.countryLabel}>Country</label>
-        <Select
-          {...register("country")}
-          isClearable
-          options={options as any}
-          value={value}
-          onChange={(selectedOption) => handleChange(selectedOption)}
-          styles={{
-            control: (baseStyles, state) => ({
-              ...baseStyles,
-              height: "50px",
-            }),
-          }}
-          theme={(theme) => ({
-            ...theme,
-            borderRadius: 0,
-            colors: {
-              ...theme.colors,
-              primary25: "hotpink",
-              primary: "black",
-            },
-          })}
-        />
+      <div>
+        <section
+          style={{
+            border: "1px solid grey",
+            width: "100%",
+          }}>
+          <label className={styles.cardInput}></label>
+          <input
+            {...register("cardNumber", {
+              required: "Card number is required",
+            })}
+            placeholder={placeholders.cardNumber}
+            style={{ width: "16em", border: "none", outline: "transparent" }}
+          />
+          <input
+            {...register("expiryDate", {
+              required: "Expiry date is required",
+            })}
+            placeholder={placeholders.expiryDate}
+            style={{ width: "6em", border: "none", outline: "transparent" }}
+          />
+          <input
+            {...register("ccv", {
+              required: "CCV is required",
+            })}
+            placeholder={placeholders.ccv}
+            style={{ width: "3em", border: "none", outline: "transparent" }}
+          />
+        </section>
+        {errors.cardNumber && <div>Field is required</div>}
+      </div>
+      <section>
+        <div className={styles.callToActionContainer}>
+          <button
+            type="button"
+            onClick={onBack}
+            aria-label={`Cancel Button`}
+            className={styles.button}>
+            Cancel
+          </button>
+          <button
+            type="submit"
+            aria-label={`Update Button`}
+            className={styles.button}>
+            Update
+          </button>
+        </div>
+      </section>
+      <section style={{ alignSelf: "center" }}>
+        <img src={stripe_img} alt="Powered by Stripe" />
       </section>
     </form>
   );
