@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import styles from "./PaymentForm.module.css";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Select from "react-select";
 import countryList from "react-select-country-list";
 import stripe_img from "../../assets/img/stripe.png";
@@ -37,11 +37,11 @@ export const PaymentForm = ({
       cardNumber: "",
       expiryDate: "",
       ccv: "",
-      addressLineOne: formData.address_one || "",
-      addressLineTwo: formData.address_two || "",
+      addressLineOne: formData?.address_one || "",
+      addressLineTwo: formData?.address_two || "",
       country: countryValue,
-      state: "" || formData.state,
-      postcode: "" || formData.post_code,
+      state: formData?.state || "",
+      postcode: formData?.post_code || "",
     },
   });
 
