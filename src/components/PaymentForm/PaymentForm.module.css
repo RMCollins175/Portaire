@@ -1,57 +1,40 @@
-* {
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-
 .formContainer {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     padding: 30px;
     gap: 10px;
-
     position: absolute;
     width: 350px;
     height: 584px;
-
     background: #FFFFFF;
-    /* Modal Drop Shadow */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
 }
 
-.label {
-    font-weight: 900;
-}
-
-.addressLabel {
-    font-size: 14px;
+.label,
+.addressLabel,
+.countryLabel,
+.stateAndPostcodeLabel {
     font-weight: 500;
+    font-size: 14px;
     line-height: 8px;
     padding-left: 2px;
 }
 
-.addressInput {
+.addressInput,
+.countryInput,
+.stateAndPostcodeInput {
     font-size: 16px;
     height: 50px;
     width: 100%;
     border-radius: 3px;
-    width: 100%;
     border: 1px #D4D4D4 solid;
 }
 
-.countryInput {
-    height: 50px;   
-    width: 100%;
-    border-radius: 3px;
-    width: 100%;
-}
-
-.countryLabel {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 8px;
+.countryLabel,
+.stateAndPostcodeLabel {
     margin-bottom: 5px;
-    padding-left: 2px;
 }
 
 .stateAndPostcodeSection {
@@ -60,26 +43,7 @@
 }
 
 .stateAndPostcodeContainer {
-    width: 50%
-}
-
-.stateAndPostcodeInput {
-    height: 50px;
-    width: 100%;
-    font-size: 16px;
-    border: 1px #D4D4D4 solid;
-    border-radius: 3px;
-}
-
-.stateAndPostcodeLabel {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 8px;
-    padding-left: 2px;
-}
-
-.cardInput {
-    
+    width: 50%;
 }
 
 .callToActionContainer {

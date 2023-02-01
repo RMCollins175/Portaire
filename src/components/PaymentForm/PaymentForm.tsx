@@ -51,7 +51,6 @@ export const PaymentForm = ({
   const options = useMemo(() => countryList().getData(), []);
 
   const handleChange = (value: any) => {
-    console.log("🚀 ~ file: PaymentForm.tsx:47 ~ handleChange ~ value", value);
     setCountryValue(value);
     setValue("country", value);
   };
@@ -199,14 +198,6 @@ export const PaymentForm = ({
       </section>
       <section className={styles.customSelect}>
         <label className={styles.countryLabel}>Country</label>
-        {/* <select {...register("country")} value={value} onChange={handleChange}>
-          {options.map((option) => (
-            <option key={option.label} value={option.label}>
-              {option.label}
-            </option>
-          ))}
-        </select> */}
-
         <Select
           {...register("country")}
           isClearable
