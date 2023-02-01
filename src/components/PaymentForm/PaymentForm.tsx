@@ -62,20 +62,20 @@ export const PaymentForm = ({
       data
     );
 
-    // fetch("https://portaireapi.herokuapp.com/test/payment", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(data),
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log("Success:", data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //   });
+    fetch("https://portaireapi.herokuapp.com/test/payment", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   const {
@@ -158,7 +158,6 @@ export const PaymentForm = ({
               required: "Card number is required",
             })}
             // placeholder={placeholders.cardNumber}
-            // style={{ width: "14.5em", border: "none", outline: "transparent" }}
             {...getCardNumberProps()}
           />
           <input
@@ -166,7 +165,6 @@ export const PaymentForm = ({
               required: "Expiry date is required",
             })}
             // placeholder={placeholders.expiryDate}
-            // style={{ width: "5em", border: "none", outline: "transparent" }}
             {...getExpiryDateProps()}
           />
           <input
@@ -174,7 +172,6 @@ export const PaymentForm = ({
               required: "CCV is required",
             })}
             // placeholder={placeholders.ccv}
-            // style={{ width: "3em", border: "none", outline: "transparent" }}
             {...getCVCProps()}
           />
         </PaymentInputsWrapper>
