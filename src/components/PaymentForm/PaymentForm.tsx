@@ -9,6 +9,8 @@ import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import placeholders from "../constants/paymentFormPlaceholders";
 import { PaymentInputsWrapper, usePaymentInputs } from "react-payment-inputs";
 import images from "react-payment-inputs/images";
+import Button from "../Button/Button";
+import colors from "../constants/theme";
 
 interface PaymentFormProps {
   onBack: () => void;
@@ -259,19 +261,14 @@ export const PaymentForm = ({
       </section>
       <section>
         <div className={styles.callToActionContainer}>
-          <button
-            type="button"
+          <Button onClick={onBack} text="Cancel" />
+          <Button
             onClick={onBack}
-            aria-label={`Cancel Button`}
-            className={styles.button}>
-            Cancel
-          </button>
-          <button
+            text="Update"
             type="submit"
-            aria-label={`Update Button`}
-            className={styles.button}>
-            Update
-          </button>
+            backgroundColor={colors.black}
+            textColor={colors.white}
+          />
         </div>
       </section>
       <section style={{ alignSelf: "center" }}>

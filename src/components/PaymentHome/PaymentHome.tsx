@@ -7,6 +7,7 @@ export const PaymentHome = ({ dispatch }: any) => {
       onClick={() => dispatch({ type: "SET_CURRENT_SCREEN", payload: "other" })}
       text="Update payment method"
       icon={<PoundIcon style={{ marginTop: 1 }} />}
+      type="payment"
     />
   );
 };

@@ -1,17 +1,41 @@
 import React, { ReactNode } from "react";
 import styles from "./Button.module.css";
+import colors from "../constants/theme";
 
 interface ButtonProps {
   text: string;
   onClick: () => void;
-  icon: ReactNode;
+  icon?: ReactNode;
+  type?: "payment" | "submit" | "cancel";
+  backgroundColor?: string;
+  textColor?: string;
 }
 
-export default function Button({ text, onClick, icon }: ButtonProps) {
+export default function Button({
+  text,
+  onClick,
+  icon,
+  type,
+  backgroundColor = colors.white,
+  textColor = colors.black,
+}: ButtonProps) {
+  if (type === "payment") {
+    return (
+      <button onClick={onClick} className={styles.paymentButton}>
+        <div>{icon}</div>
+        <p>{text}</p>
+      </button>
+    );
+  }
+
   return (
-    <button onClick={onClick} className={styles.button}>
-      <div>{icon}</div>
-      <p>{text}</p>
+    <button
+      type={type === "submit" ? "submit" : "button"}
+      onClick={onClick}
+      aria-label={`${text} Button`}
+      className={styles.generalCallToActionButton}
+      style={{ backgroundColor: backgroundColor, color: textColor }}>
+      {text}
     </button>
   );
 }

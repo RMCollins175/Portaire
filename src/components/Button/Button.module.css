@@ -1,17 +1,20 @@
-.button {
+.paymentButton {
     display: flex;
     align-items: center;
     height: 28px;
     width: 181px;
     border-radius: 2px;
     padding: 8px;
-
     font-size: 12px;
     line-height: 12px;
     font-weight: 400;
-
     justify-content: space-around;
-
     border: 1px solid #F9F9F9 
+}
 
+.generalCallToActionButton {
+    height: 40px;
+    width: 170px;
+    border-radius: 3px;
+    border: 1px solid black
 }
