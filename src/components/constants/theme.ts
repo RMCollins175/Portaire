@@ -6,6 +6,8 @@ const theme = {
   white: "#FFFFFF",
   black: "#000000",
   error: "#e52727",
+  borderFocus: "#0066FF",
+  selectBackground: "#F0F8FF",
 };
 
 export default theme;

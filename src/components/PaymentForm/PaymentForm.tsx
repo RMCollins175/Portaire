@@ -208,18 +208,26 @@ export const PaymentForm = ({
           styles={{
             control: (baseStyles, state) => ({
               ...baseStyles,
+              // border: `1px solid ${colors.border}`,
+              borderRadius: "3px",
               height: "50px",
+              // color: colors.borderFocus,
+              // borderColor: state.isFocused ? colors.borderFocus : colors.border,
+            }),
+            option: (base) => ({
+              ...base,
+              color: colors.black,
             }),
           }}
-          theme={(theme) => ({
-            ...theme,
-            borderRadius: 0,
-            colors: {
-              ...theme.colors,
-              primary25: "hotpink",
-              primary: "black",
-            },
-          })}
+          // theme={(theme) => ({
+          //   ...theme,
+          //   borderRadius: 3,
+          //   colors: {
+          //     ...theme.colors,
+          //     primary: colors.selectBackground,
+          //     primary25: colors.selectBackground,
+          //   },
+          // })}
         />
         {/* {errors.country && <div>Field is rquired</div>} */}
       </section>
