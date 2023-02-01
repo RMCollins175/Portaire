@@ -1,7 +1,7 @@
 import { useEffect, useReducer } from "react";
 import { PaymentForm } from "./components/PaymentForm/PaymentForm";
 import { PaymentHome } from "./components/PaymentHome/PaymentHome";
-import { getRandomElement } from "./components/utilities/getRandomElement";
+import { getRandomElement } from "./components/utilities/getRandomElement/function";
 import { Action, AppState } from "./types";
 import "./App.css";
 

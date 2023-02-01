@@ -39,3 +39,6 @@ I would have liked to spend more time on this but my time was limited. Here are 
 - the state input right border is covered by the left border of postcode
 - The select dropdown is hard to style
 - I'm not sure why the error validation messages are not showing up
+
+- Could have used React router to navigate between the two pages, but I thought it was overkill for this project
+-

@@ -1,5 +1,5 @@
 export interface ApiResponse {
-  address_one: number;
+  address_one: string;
   address_two: string;
   email: string;
   first_name: string;

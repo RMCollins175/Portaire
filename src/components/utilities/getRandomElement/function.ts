@@ -1,4 +1,4 @@
-import { ApiResponse } from "../../types";
+import { ApiResponse } from "../../../types";
 
 // returns a random element fromm response array
 export const getRandomElement = (items: ApiResponse[]) => {

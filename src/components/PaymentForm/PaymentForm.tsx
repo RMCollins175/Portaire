@@ -61,7 +61,6 @@ export const PaymentForm = ({
       "🚀 ~ file: PaymentForm.tsx:60 ~ handleSubmission ~ data",
       data
     );
-
     // fetch("https://portaireapi.herokuapp.com/test/payment", {
     //   method: "POST",
     //   headers: {
@@ -104,6 +103,78 @@ export const PaymentForm = ({
       onSubmit={handleSubmit((data) => handleSubmission(data))}
       className={styles.formContainer}>
       <h3 style={{ margin: "0px" }}>Update payment method</h3>
+      {/* <section style={{ width: "350px", height: "40px", display: "flex" }}>
+        <PaymentInputsWrapper
+          {...wrapperProps}
+          styles={
+            {
+              fieldWrapper: {
+                base: css`
+                  border-color: black;
+                `,
+              },
+              inputWrapper: {
+                base: css`
+                  border-color: black;
+                  font-size: 14px;
+                `,
+                errored: css`
+                  border-color: #e52727;
+                `,
+                focused: css`
+                  border-color: black;
+                `,
+              },
+              input: {
+                base: css`
+                  color: black;
+                `,
+                cardNumber: css`
+                  width: 198px;
+                `,
+                expiryDate: css`
+                  width: 80px;
+                `,
+                cvc: css`
+                  width: 30px;
+                `,
+              },
+              errorText: {
+                base: css`
+                  color: white;
+                  margin-top: -1px;
+                  padding-left: 5px;
+                  background-color: #e52727;
+                  border-radius: 3px;
+                `,
+              },
+            } as any
+          }>
+          <svg {...getCardImageProps({ images } as any)} />
+          <label className={styles.cardInput}></label>
+          <input
+            {...register("cardNumber", {
+              required: "Card number is required",
+            })}
+            // placeholder={placeholders.cardNumber}
+            {...getCardNumberProps()}
+          />
+          <input
+            {...register("expiryDate", {
+              required: "Expiry date is required",
+            })}
+            // placeholder={placeholders.expiryDate}
+            {...getExpiryDateProps()}
+          />
+          <input
+            {...register("ccv", {
+              required: "CCV is required",
+            })}
+            // placeholder={placeholders.ccv}
+            {...getCVCProps()}
+          />
+        </PaymentInputsWrapper>
+      </section> */}
 
       <section>
         <label className={styles.addressLabel}>Address Line 1</label>
@@ -178,12 +249,18 @@ export const PaymentForm = ({
       <section>
         <div className={styles.callToActionContainer}>
           <Button onClick={onBack} text="Cancel" />
-          <Button
+          {/* <Button
             text="Update"
             type="submit"
             backgroundColor={colors.black}
             textColor={colors.white}
-          />
+          /> */}
+          <button
+            type="submit"
+            aria-label={`Update Button`}
+            className={styles.button}>
+            Update
+          </button>
         </div>
       </section>
       <section style={{ alignSelf: "center" }}>
