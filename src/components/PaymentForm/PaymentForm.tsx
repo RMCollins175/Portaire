@@ -1,9 +1,10 @@
 import React, { useMemo, useState } from "react";
+import { css } from "styled-components";
 import styles from "./PaymentForm.module.css";
 import { useForm } from "react-hook-form";
 import Select from "react-select";
 import countryList from "react-select-country-list";
-import stripe_img from "../../assets/img/stripe.png";
+import stripe_img from "../../assets/img/stripe.svg";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import placeholders from "../constants/paymentFormPlaceholders";
 import { PaymentInputsWrapper, usePaymentInputs } from "react-payment-inputs";
@@ -101,8 +102,53 @@ export const PaymentForm = ({
       onSubmit={handleSubmit((data) => handleSubmission(data))}
       className={styles.formContainer}>
       <h3 style={{ margin: "0px" }}>Update payment method</h3>
-      <div>
-        <PaymentInputsWrapper {...wrapperProps}>
+      <div style={{ width: "350px", height: "40px", display: "flex" }}>
+        <PaymentInputsWrapper
+          {...wrapperProps}
+          styles={
+            {
+              fieldWrapper: {
+                base: css`
+                  border-color: black;
+                `,
+              },
+              inputWrapper: {
+                base: css`
+                  border-color: black;
+                  font-size: 14px;
+                `,
+                errored: css`
+                  border-color: #e52727;
+                `,
+                focused: css`
+                  border-color: black;
+                `,
+              },
+              input: {
+                base: css`
+                  color: black;
+                `,
+                cardNumber: css`
+                  width: 198px;
+                `,
+                expiryDate: css`
+                  width: 80px;
+                `,
+                cvc: css`
+                  width: 30px;
+                `,
+              },
+              errorText: {
+                base: css`
+                  color: white;
+                  margin-top: -1px;
+                  padding-left: 5px;
+                  background-color: #e52727;
+                  border-radius: 3px;
+                `,
+              },
+            } as any
+          }>
           <svg {...getCardImageProps({ images } as any)} />
           <label className={styles.cardInput}></label>
           <input
@@ -110,7 +156,7 @@ export const PaymentForm = ({
               required: "Card number is required",
             })}
             // placeholder={placeholders.cardNumber}
-            // style={{ width: "16em", border: "none", outline: "transparent" }}
+            // style={{ width: "14.5em", border: "none", outline: "transparent" }}
             {...getCardNumberProps()}
           />
           <input
@@ -118,7 +164,7 @@ export const PaymentForm = ({
               required: "Expiry date is required",
             })}
             // placeholder={placeholders.expiryDate}
-            // style={{ width: "6em", border: "none", outline: "transparent" }}
+            // style={{ width: "5em", border: "none", outline: "transparent" }}
             {...getExpiryDateProps()}
           />
           <input
@@ -130,7 +176,6 @@ export const PaymentForm = ({
             {...getCVCProps()}
           />
         </PaymentInputsWrapper>
-        {errors.cardNumber && <div>Field is required</div>}
       </div>
       <section>
         <label className={styles.addressLabel}>Address Line 1</label>

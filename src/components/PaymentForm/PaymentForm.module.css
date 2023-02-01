@@ -10,7 +10,7 @@
     gap: 10px;
 
     position: absolute;
-    width: 410px;
+    width: 350px;
     height: 584px;
 
     background: #FFFFFF;
@@ -35,7 +35,8 @@
     height: 50px;
     width: 100%;
     border-radius: 3px;
-    width: 100%
+    width: 100%;
+    border: 1px #D4D4D4 solid;
 }
 
 .countryInput {
@@ -66,6 +67,8 @@
     height: 50px;
     width: 100%;
     font-size: 16px;
+    border: 1px #D4D4D4 solid;
+    border-radius: 3px;
 }
 
 .stateAndPostcodeLabel {
@@ -92,7 +95,7 @@
 }
 
 .customSelect {
-    width: 100%;
+    width: 102%;
     display: flex;
     flex-direction: column;
 }
