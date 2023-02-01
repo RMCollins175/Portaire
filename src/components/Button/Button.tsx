@@ -4,9 +4,9 @@ import colors from "../constants/theme";
 
 interface ButtonProps {
   text: string;
-  onClick: () => void;
+  onClick?: () => void;
   icon?: ReactNode;
-  type?: "payment" | "submit" | "cancel";
+  type?: "payment" | "submit" | "reset" | undefined;
   backgroundColor?: string;
   textColor?: string;
 }
@@ -30,8 +30,8 @@ export default function Button({
 
   return (
     <button
-      type={type === "submit" ? "submit" : "button"}
       onClick={onClick}
+      type={type || "button"}
       aria-label={`${text} Button`}
       className={styles.generalCallToActionButton}
       style={{ backgroundColor: backgroundColor, color: textColor }}>

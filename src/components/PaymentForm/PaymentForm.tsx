@@ -51,6 +51,7 @@ export const PaymentForm = ({
   const options = useMemo(() => countryList().getData(), []);
 
   const handleChange = (value: any) => {
+    console.log("🚀 ~ file: PaymentForm.tsx:54 ~ handleChange ~ value", value);
     setCountryValue(value);
     setValue("country", value);
   };
@@ -61,20 +62,20 @@ export const PaymentForm = ({
       data
     );
 
-    fetch("https://portaireapi.herokuapp.com/test/payment", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    // fetch("https://portaireapi.herokuapp.com/test/payment", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(data),
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log("Success:", data);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error:", error);
+    //   });
   };
 
   const {
@@ -103,94 +104,24 @@ export const PaymentForm = ({
       onSubmit={handleSubmit((data) => handleSubmission(data))}
       className={styles.formContainer}>
       <h3 style={{ margin: "0px" }}>Update payment method</h3>
-      <div style={{ width: "350px", height: "40px", display: "flex" }}>
-        <PaymentInputsWrapper
-          {...wrapperProps}
-          styles={
-            {
-              fieldWrapper: {
-                base: css`
-                  border-color: black;
-                `,
-              },
-              inputWrapper: {
-                base: css`
-                  border-color: black;
-                  font-size: 14px;
-                `,
-                errored: css`
-                  border-color: #e52727;
-                `,
-                focused: css`
-                  border-color: black;
-                `,
-              },
-              input: {
-                base: css`
-                  color: black;
-                `,
-                cardNumber: css`
-                  width: 198px;
-                `,
-                expiryDate: css`
-                  width: 80px;
-                `,
-                cvc: css`
-                  width: 30px;
-                `,
-              },
-              errorText: {
-                base: css`
-                  color: white;
-                  margin-top: -1px;
-                  padding-left: 5px;
-                  background-color: #e52727;
-                  border-radius: 3px;
-                `,
-              },
-            } as any
-          }>
-          <svg {...getCardImageProps({ images } as any)} />
-          <label className={styles.cardInput}></label>
-          <input
-            {...register("cardNumber", {
-              required: "Card number is required",
-            })}
-            // placeholder={placeholders.cardNumber}
-            {...getCardNumberProps()}
-          />
-          <input
-            {...register("expiryDate", {
-              required: "Expiry date is required",
-            })}
-            // placeholder={placeholders.expiryDate}
-            {...getExpiryDateProps()}
-          />
-          <input
-            {...register("ccv", {
-              required: "CCV is required",
-            })}
-            // placeholder={placeholders.ccv}
-            {...getCVCProps()}
-          />
-        </PaymentInputsWrapper>
-      </div>
+
       <section>
         <label className={styles.addressLabel}>Address Line 1</label>
         <input
           {...register("addressLineOne", {
-            required: "Address line 1 is required",
+            required: "Address Line 1 is required",
           })}
           placeholder={placeholders.address}
           required
           className={styles.addressInput}
         />
+        {/* {errors.addressLineOne && <p>Address is required</p>} */}
       </section>
       <section>
         <label className={styles.addressLabel}>Address Line 2</label>
         <input
           {...register("addressLineTwo", {
-            required: "Address line 2 is required",
+            required: "Address Line 2 is required",
           })}
           placeholder={placeholders.address}
           className={styles.addressInput}
@@ -208,28 +139,17 @@ export const PaymentForm = ({
           styles={{
             control: (baseStyles, state) => ({
               ...baseStyles,
-              // border: `1px solid ${colors.border}`,
               borderRadius: "3px",
               height: "50px",
-              // color: colors.borderFocus,
-              // borderColor: state.isFocused ? colors.borderFocus : colors.border,
+              borderColor: colors.borderFocus,
             }),
             option: (base) => ({
               ...base,
               color: colors.black,
             }),
           }}
-          // theme={(theme) => ({
-          //   ...theme,
-          //   borderRadius: 3,
-          //   colors: {
-          //     ...theme.colors,
-          //     primary: colors.selectBackground,
-          //     primary25: colors.selectBackground,
-          //   },
-          // })}
         />
-        {/* {errors.country && <div>Field is rquired</div>} */}
+        {errors.country && <div>Field is rquired</div>}
       </section>
       <section className={styles.stateAndPostcodeSection}>
         <div className={styles.stateAndPostcodeContainer}>
@@ -259,7 +179,6 @@ export const PaymentForm = ({
         <div className={styles.callToActionContainer}>
           <Button onClick={onBack} text="Cancel" />
           <Button
-            onClick={onBack}
             text="Update"
             type="submit"
             backgroundColor={colors.black}
